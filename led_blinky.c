@@ -85,13 +85,14 @@ int main(void)
     /* Init output LED GPIO. */
     GPIO_PinInit(BOARD_LED_GPIO, BOARD_LED_GPIO_PIN, &led_config);
 
-    /* Set systick reload value to generate 1ms interrupt */
+    /* Set systick reload value to generate 1ms interrupt 
     if(SysTick_Config(SystemCoreClock / 1000U))
     {
         while(1)
         {
         }
     }
+*/
 
     while (1)
     {
@@ -99,4 +100,9 @@ int main(void)
         SysTick_DelayTicks(1000U);
         GPIO_PortToggle(BOARD_LED_GPIO, 1u << BOARD_LED_GPIO_PIN);
     }
+    
+             
+    
 }
+
+
