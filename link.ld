@@ -74,17 +74,20 @@ SECTIONS
         . += STACK_SIZE;
         _start_of_stack = . ;
     } > RAM
+    
+    .heap (COPY):
+    {
+        __end__ = .;
+        PROVIDE(end = .);
+        *(.heap*)
+        __HeapLimit = .;
+    } > RAM
 
-    . = ALIGN(4);
+    . = ALIGN(4);   
     _end = . ;
+     end = . ;  
+   
 	
-	.heap : {
-        __heap_start__ = .;
-        end = __heap_start__;
-        _end = end;
-        __end = end;
-        KEEP(*(.heap))
-        __heap_end__ = .;
-        __HeapLimit = __heap_end__;
-    } > REGION_HEAP
 }
+
+

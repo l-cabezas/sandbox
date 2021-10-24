@@ -65,7 +65,7 @@ void SysTick_DelayTicks(uint32_t n)
 {
     g_systickCounter = n;
     while(g_systickCounter != 0U)
-    {
+    {    
     }
 }
 
@@ -85,19 +85,19 @@ int main(void)
     /* Init output LED GPIO. */
     GPIO_PinInit(BOARD_LED_GPIO, BOARD_LED_GPIO_PIN, &led_config);
 
-    /* Set systick reload value to generate 1ms interrupt 
-    if(SysTick_Config(SystemCoreClock / 1000U))
+    /* Set systick reload value to generate 1ms interrupt */
+
+/*    if(SysTick_Config(SystemCoreClock / 1000U))
     {
         while(1)
         {
         }
-    }
-*/
+    } */	
 
     while (1)
     {
         /* Delay 1000 ms */
-        SysTick_DelayTicks(1000U);
+        SysTick_DelayTicks(1000U);               
         GPIO_PortToggle(BOARD_LED_GPIO, 1u << BOARD_LED_GPIO_PIN);
     }
     
