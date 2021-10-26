@@ -2,11 +2,7 @@
 // Declaration of the default fault handlers
 //*****************************************************************************
 
-
-#include "led_blinky.h"
-
 #define WEAK __attribute__ ((weak))
-#define WEAK_AV __attribute__ ((weak, section(".after_vectors")))
 
 void WEAK  ResetHandler(void);
 void WEAK  NMIIntHandler(void);
@@ -182,7 +178,7 @@ void Default_ResetHandler(void)
 #pragma weak SVCIntHandler = DefaultIntHandler
 #pragma weak DebugMonIntHandler = DefaultIntHandler
 #pragma weak PendSVIntHandler = DefaultIntHandler
-//#pragma weak SysTickIntHandler = DefaultIntHandler
+#pragma weak SysTickIntHandler = DefaultIntHandler
 #pragma weak DMA0IntHandler = Default_ResetHandler
 #pragma weak DMA1IntHandler = Default_ResetHandler
 #pragma weak DMA2IntHandler = Default_ResetHandler
@@ -230,6 +226,4 @@ static void DefaultIntHandler(void)
 }
 
 
-WEAK_AV void SysTickIntHandler(void)
-{ for(;;);
-}
+
