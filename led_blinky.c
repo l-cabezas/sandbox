@@ -54,7 +54,7 @@ volatile uint32_t g_systickCounter;
  * Code
  ******************************************************************************/
 
-void DefaultSysTickIntHandler(void)
+void SysTickIntHandler(void)
 {
     if (g_systickCounter != 0U)
     { 
@@ -89,8 +89,9 @@ int main(void)
     GPIO_PinInit(BOARD_LED_GPIO, BOARD_LED_GPIO_PIN, &led_config);
 
     /* Set systick reload value to generate 1ms interrupt */
-    	       
-    if(SysTick_Config(SystemCoreClock / 1000U))
+    	
+    //if(SysTick_Config(SystemCoreClock / 1000U))           
+    if(SysTick_Config(10000U))
     {
         while(1)
         {
