@@ -164,7 +164,6 @@ void Default_ResetHandler(void)
     main();
 }
 
-
 //*****************************************************************************
 // Provide weak aliases for each Exception handler to the DefaultIntHandler.
 // As they are weak aliases, any function with the same name will override
@@ -225,6 +224,4 @@ static void DefaultIntHandler(void)
 {
 	for(;;);
 }
-
-
 
