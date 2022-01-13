@@ -4,8 +4,7 @@ PREFIX=arm-none-eabi-
 
 ARCHFLAGS=-mthumb -mcpu=cortex-m0plus
 CFLAGS=-I./includes/  -g -O2 -Wall -Werror -D "CPU_MKL46Z256VLL4"
-#LDFLAGS=-specs=nosys.specs -Wl,--gc-sections,-Map,$(TARGET).map,-Tlink.ld
-LDFLAGS=-specs=nano.specs -specs=nosys.specs -Wl,--gc-sections,-Map,$(TARGET).map,-Tlink.ld
+LDFLAGS=$(ARCHFLAGS) -specs=nano.specs -specs=nosys.specs -Wl,--gc-sections,-Map,$(TARGET).map,-Tlink.ld
 
 #LDFLAGS=--specs=nano.specs -Wl,--gc-sections,-Map,$(TARGET).map,-Tlink.ld
 
@@ -37,10 +36,8 @@ clean:
 	$(CC) -c $(ARCHFLAGS) $(CFLAGS) -o $@ $<
 
 $(TARGET).elf: $(OBJ) $(OBJ2)
-	$(LD) $(LDFLAGS) -o $@ $(OBJ) -o $@ $(OBJ2)
-	#$(LD) $(LDFLAGS) -o $@ $(OBJ2)
+	$(LD) $(LDFLAGS) -o $@ $(OBJ) -o $@ $(OBJ2)	
 	
-
 
 %.srec: %.elf
 	$(OBJCOPY) -O srec $< $@
@@ -53,4 +50,4 @@ size:
 	
 
 flash: build
-	openocd -f openocd.cfg 
+	openocd -f openocd.cfg -c "program $(TARGET).elf verify reset exit" 
